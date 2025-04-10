@@ -44,9 +44,9 @@ def projection_timeframe():
     return info
 
 def data(naive, sophisticated, projection):
-    print(f"Naive Model: I = {naive[initial_population]}, g = {naive[growth_rate]}% per {naive[growth_unit]}")
-    print(f"Sophisticated Model: I = {sophisticated[initial_population]}, g = {sophisticated[growth_rate]}% per {sophisticated[growth_unit]}, Fission-event frequency: {sophisticated[fission_unit]}")
-    print(f"Projection timeframe: {projection[projection_time]} {projection[projection_time_unit]}")
+    print(f"Naive Model: I = {naive.get("population")}, g = {naive.get("rate")}% per {naive.get("unit")}")
+    print(f"Sophisticated Model: I = {sophisticated.get("population")}, g = {sophisticated.get("rate")}% per {sophisticated.get("unit")}, Fission-event frequency: {sophisticated.get("fission")}")
+    print(f"Projection timeframe: {projection.get("time")} {projection.get("unit")}")
 
 
 def module_one():
