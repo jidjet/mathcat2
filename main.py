@@ -24,13 +24,22 @@ def sophisticated_model():
     initial_population = int(input("Enter the initial population: ")) 
     growth_rate = int(input("Enter the growth rate (enter 7% as 7): "))
     growth_unit = input("Enter the growth rate time unit (day, half-day, quarter-day, hour, minute, second): ")
-    fission_unit =  input("Enter the fission-event frequency time unit(day, half-day, quarter-day, hour, minute, second): ")
+    fission_unit = input("Enter the fission-event frequency time unit (day, half-day, quarter-day, hour, minute, second, custom): ")
+    
+    custom_unit = None  
+    if fission_unit == "custom":
+        custom_unit = int(input("Enter the number of fission events per growth rate time unit: "))
+    
     info = {
         "population": initial_population,
         "rate": growth_rate,
         "unit": growth_unit,
         "fission": fission_unit
     }
+
+    if fission_unit == "custom":
+        info["custom"] = custom_unit
+    
     return info
 
 def projection_timeframe():
@@ -45,7 +54,10 @@ def projection_timeframe():
 
 def data(naive, sophisticated, projection):
     print(f"Naive Model: I = {naive.get("population")}, g = {naive.get("rate")}% per {naive.get("unit")}")
-    print(f"Sophisticated Model: I = {sophisticated.get("population")}, g = {sophisticated.get("rate")}% per {sophisticated.get("unit")}, Fission-event frequency: {sophisticated.get("fission")}")
+    if sophisticated.get("fission") == "custom":
+        print(f"Sophisticated Model: I = {sophisticated.get("population")}, g = {sophisticated.get("rate")}% per {sophisticated.get("unit")}, Fission-event frequency: {sophisticated.get("custom")}")
+    else:
+        print(f"Sophisticated Model: I = {sophisticated.get("population")}, g = {sophisticated.get("rate")}% per {sophisticated.get("unit")}, Fission-event frequency: {sophisticated.get("fission")}")
     print(f"Projection timeframe: {projection.get("time")} {projection.get("unit")}")
 
 
