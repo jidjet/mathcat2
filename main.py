@@ -45,12 +45,38 @@ def sophisticated_model():
 def projection_timeframe():
     print("Future projection timeframe for both models:")
     projection_time = int(input("Enter the amount of time to project into the future: "))
-    projection_time_unit = input("Enter the projection time unit (day, half-day, quarter-day, hour, minute, second):")
+    projection_time_unit = input("Enter the projection time unit (day, half-day, quarter-day, hour, minute, second): ")
     info = {
         "time": projection_time,
         "unit": projection_time_unit
     }
     return info
+
+
+def population_calcualtion(model, data, projection):
+    if model == "naive":
+        percent = data.get("rate") * 0.01
+        
+
+
+'''
+def population_calculation(model, data):
+    if model == "naive":
+        percent = data.get("rate") * 0.01
+        population = data.get("population") 
+        percentplusthing = percent + 1
+        population_size = percentplusthing * population
+        return population_size
+    elif model == "sophisticated":
+        percent = data.get("rate") * 0.01
+        population = data.get("population") 
+        percentplusthing = percent + 1
+        population_size = percentplusthing * population
+        return population_size 
+'''
+
+        
+
 
 def data(naive, sophisticated, projection):
     print(f"Naive Model: I = {naive.get("population")}, g = {naive.get("rate")}% per {naive.get("unit")}")
