@@ -27,7 +27,7 @@ def sophisticated_model():
     initial_population = int(input("Enter the initial population: "))
     growth_rate = int(input("Enter the growth rate (enter 7% as 7): "))
     growth_unit = input("Enter the growth rate time unit (day, half-day, quarter-day, hour, minute, second): ")
-    fission_unit = input("Enter the fission-event frequency time unit (day, half-day, quarter-day, hour, minute, second, custom): ")
+    fission_unit = input("Enter the fission-event frequency time unit (day, half-day, quarter-day, hour, minute, custom): ")
 
     custom_unit = None
     if fission_unit == "custom":
@@ -98,5 +98,38 @@ def module_one_with_results():
     print(f"\nNaive model projected population size: {naive_result:.2f}")
     print(f"Sophisticated model projected population size: {sophisticated_result:.2f}")
 
+def sophisticated_model_to_target():
+    print("MODULE 2: TIME FOR A POPULATION TO REACH A TARGET SIZE")
 
-module_one_with_results()
+    initial_population = int(input("Enter the initial population: "))
+    growth_rate = float(input("Enter the growth rate (enter 7% as 7): "))
+    growth_unit = input("Enter the growth rate time unit (year, quarter, month, week, day): ")
+
+    fission_unit = input("Enter the fission-event frequency time unit (day, half-day, quarter-day, hour, minute, custom): ")
+    custom_unit = None
+    if fission_unit == "custom":
+        custom_unit = int(input("Enter the number of fission events per growth rate time unit: "))
+
+    target_amount = int(input("Enter the target amount: "))
+
+    model_info = {
+        "population": initial_population,
+        "rate": growth_rate,
+        "unit": growth_unit,
+        "fission": fission_unit,
+        "target": target_amount
+    }
+
+    if fission_unit == "custom":
+        model_info["custom"] = custom_unit
+
+    print("\nSummary of entered data:")
+    if fission_unit == "custom":
+        print(f'Sophisticated model: I = {initial_population}, g = {growth_rate}% per {growth_unit}, Fission-event frequency: {custom_unit}')
+    else:
+        print(f'Sophisticated model: I = {initial_population}, g = {growth_rate}% per {growth_unit}, Fission-event frequency: {fission_unit}')
+    print(f'Target amount: {target_amount}')
+
+    return model_info
+
+sophisticated_model_to_target()
