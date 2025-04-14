@@ -132,4 +132,41 @@ def sophisticated_model_to_target():
 
     return model_info
 
-sophisticated_model_to_target()
+def forward_projection_to_target(model_info):
+    initial_population = model_info["population"]
+    growth_rate = model_info["rate"] / 100
+    growth_unit = model_info["unit"]
+    fission_unit = model_info["fission"]
+    target = model_info["target"]
+
+    if fission_unit == "custom":
+        fission_per_growth = model_info["custom"]
+    else:
+        fission_per_growth = time_periods[growth_unit] / time_periods[fission_unit]
+
+    growth_per_fission = growth_rate / fission_per_growth
+
+    population = initial_population
+    projection = [round(population, 2)]
+    fission_count = 0
+
+    while population <= target:
+        population *= (1 + growth_per_fission)
+        fission_count += 1
+        projection.append(round(population, 2))
+
+    print("Forward projection:", projection)
+    print(f"Time taken: {fission_count} {fission_unit}(s)")
+
+    if fission_unit != growth_unit:
+        full_units = int(fission_count // fission_per_growth)
+        remainder_fissions = int(fission_count % fission_per_growth)
+        if full_units > 0:
+            print(f"Equivalent time: {full_units} {growth_unit}(s) & {remainder_fissions} {fission_unit}(s)")
+        else:
+            print(f"Equivalent time: {remainder_fissions} {fission_unit}(s)")
+
+    return projection
+ 
+info = sophisticated_model_to_target()
+forward_projection_to_target(info)
