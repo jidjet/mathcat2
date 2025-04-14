@@ -1,4 +1,8 @@
 time_periods = {
+    "year": 365 * 24,
+    "quarter": 91.25 * 24,
+    "month": 30 * 24,
+    "week": 7 * 24,
     "day": 24,
     "half-day": 12,
     "quarter-day": 6,
